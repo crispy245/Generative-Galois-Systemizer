@@ -1,7 +1,6 @@
-src/gen_verilog/*.v
 *.vcd
 *.in
-*.ouy
+*.out
 Makefile
 *.txt
 src/systemize_tb

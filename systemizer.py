@@ -21,6 +21,7 @@ def main():
             help='Run a simulation of the system only, educational purposes')
     parser.add_argument('--clean',dest='clean',action='store_true')
     parser.add_argument('--verify',dest='verify',action='store_true')
+    parser.add_argument('--regen',dest='regen',action='store_true')
     args = parser.parse_args()
     
 
@@ -36,8 +37,12 @@ def main():
                 elif(args.filepath.endswith(".cvs")):
                         ver.getMatrixFromCvs(args.filepath)
                         ver.outMatrixToBinary()
-        else:
+
+        elif(not args.regen):
             ver.outMatrixRandom()
+
+        if(args.regen):
+             ver.outMatrixRandom()
 
         if(args.runSimulation):
             ver.runExampleSim()

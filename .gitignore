@@ -5,3 +5,4 @@ src/gen_verilog/*.v
 Makefile
 *.txt
 src/systemize_tb
+env/

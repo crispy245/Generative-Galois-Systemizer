@@ -56,6 +56,10 @@ systemize_tb: $(SOURCES) systemize_tb
 run_tb: systemize_tb
 	./systemize_tb
 
+verify:
+	sage gen_matrix/verify_test.sage -N $N -L $L -K $K -m $M gen_matrix/data.in gen_matrix/data.out
+    
+
 clean:
 	rm -rf systemize_tb *.vcd
 

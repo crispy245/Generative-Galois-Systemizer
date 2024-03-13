@@ -123,7 +123,8 @@ class VerilogGen(Systemizer):
         self.cleanFolder("gen_verilog")
     
     def cleanMatrix(self):
-        self.cleanFolder("gen_matrix")
+        os.system("rm -f gen_matrix/data.out")
+        os.system("rm -f gen_matrix/data.in")
     
     def cleanMakefile(self):
         os.system("rm -rf Makefile")
@@ -131,6 +132,7 @@ class VerilogGen(Systemizer):
     def cleanAll(self):
         self.cleanMakefile()
         self.cleanVerilogGen()
+        self.cleanMatrix()
         print("Cleaned folders for generation...")
 
 

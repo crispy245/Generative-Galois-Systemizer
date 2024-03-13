@@ -19,9 +19,10 @@ def main():
             help='Generate all the files of the systemizer')
     parser.add_argument('--runSimulation',dest='runSimulation',action='store_true',
             help='Run a simulation of the system only, educational purposes')
-    parser.add_argument('--clean',dest='clean',action='store_true')
-    parser.add_argument('--verify',dest='verify',action='store_true')
-    parser.add_argument('--regen',dest='regen',action='store_true')
+    parser.add_argument('--verify',dest='verify',action='store_true',
+            help='Run a verification script of the result from the systemizer')
+    parser.add_argument('--regen',dest='regen',action='store_true',
+            help='Regenerate the random matrix without regenerating the whole system')
     args = parser.parse_args()
     
 

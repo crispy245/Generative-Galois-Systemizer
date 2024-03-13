@@ -51,6 +51,7 @@ def main():
         if(args.genFullSystem):
             ver.genFullSystem()
         if(args.verify):
+            ver.runMake()
             ver.verify()
         
 

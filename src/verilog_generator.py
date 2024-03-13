@@ -106,6 +106,9 @@ class VerilogGen(Systemizer):
         #output_path = os.path.join(self.gen_matrix, "Verification.txt")
         os.system(command)
         print("Generated Verificaiton...")
+    
+    def runMake(self):
+        os.system(f"(cd {self.current_dir}/ && make)")
 
     def cleanFolder(self, folder):
         folder_path = os.path.join(self.current_dir, folder)

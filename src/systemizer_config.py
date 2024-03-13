@@ -56,7 +56,7 @@ class Systemizer:
     
     
     def getMatrixFromFile(self,filepath):
-        self.int_matrix = np.loadtxt(filepath,delimiter=' ',dtype=int)
+        self.int_matrix = np.loadtxt(filepath,dtype=int)
         if (self.int_matrix >= self.field).sum() > 0:
             self.int_matrix = None
             raise ValueError(f"Found a value not existant in GF({self.field})")

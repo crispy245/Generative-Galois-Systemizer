@@ -39,17 +39,29 @@ class VerilogGen(Systemizer):
             print("Barret generation requires a prime field.")
         print("Generated Barret...")
 
+    def setEarlyAbort(self):
+        self.abort = True
+
     def genSystemizer(self):
-        self.gen_file('gen_systemizer_GFx.py', "systemizer.v", f"-n {self.systArraySize} -m {self.field} -l {self.matrixSize[0]} -k {self.matrixSize[1]}")
+        early_abort = ''
+        if self.abort:
+            early_abort = "--early_abort"
+        self.gen_file('gen_systemizer_GFx.py', "systemizer.v", f"-n {self.systArraySize} -m {self.field} -l {self.matrixSize[0]} -k {self.matrixSize[1]} {early_abort}")
         print("Generated Systemizer...")
 
     def genPhase(self):
-        self.gen_file('gen_phase.py', "phase.v", f"-m {self.field}")
+        early_abort = ''
+        if self.abort:
+            early_abort = "--early_abort"
+        self.gen_file('gen_phase.py', "phase.v", f"-m {self.field} {early_abort}")
         print("Generated Phase...")
 
     def genStep(self):
+        early_abort = ''
         if self.field != 2:
-            self.gen_file('gen_step.py', "step.v")
+            if self.abort:
+                early_abort = "--early_abort"
+            self.gen_file('gen_step.py', "step.v",f"{early_abort}")
             print("Generated Step...")
 
     def genProcesorAB(self):
@@ -101,7 +113,6 @@ class VerilogGen(Systemizer):
             file_path = os.path.join(self.gen_matrix, file_name)
         if not os.path.exists(file_path):
             raise ValueError("data.in and data.out not found...")
-            return False
         command = f"sage {os.path.join(self.gen_matrix, 'verify_test.sage')} -N {self.systArraySize} -m {self.field} -L {self.matrixSize[0]} -K {self.matrixSize[1]} {self.gen_matrix}/data.in {self.gen_matrix}/data.out"
         #output_path = os.path.join(self.gen_matrix, "Verification.txt")
         os.system(command)

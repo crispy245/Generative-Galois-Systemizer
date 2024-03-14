@@ -23,6 +23,10 @@ def main():
             help='Run a verification script of the result from the systemizer')
     parser.add_argument('--regen',dest='regen',action='store_true',
             help='Regenerate the random matrix without regenerating the whole system')
+    parser.add_argument('--early_abort',dest='early_abort',action='store_true',
+            help='Generate the system with early abort option on')
+    parser.add_argument('--not_systemizable',dest='not_systemizable',action='store_true',
+            help='Generated matrix will be non-systemizable, useful to test early abort')
     args = parser.parse_args()
     
 
@@ -30,7 +34,9 @@ def main():
     if args.n and args.gf and args.l and args.k:
         ver = VerilogGen(args.gf,args.n,(args.l,args.k))
         ver.cleanAll()
-
+        
+        if(args.early_abort):
+             ver.setEarlyAbort()
         if(args.filepath):
                 if(args.filepath.endswith(".txt")):
                         ver.getMatrixFromFile(args.filepath)

@@ -46,7 +46,10 @@ def main():
                         ver.outMatrixToBinary()
 
         elif(not args.regen):
-            ver.outMatrixRandom()
+            if(args.not_systemizable):
+                ver.outMatrixRandom(systemizable=False)
+            else:
+                ver.outMatrixRandom()
 
         if(args.regen):
              ver.outMatrixRandom()

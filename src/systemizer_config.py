@@ -73,7 +73,13 @@ class Systemizer:
                         print(fmt.format(int(i)),end="")
                     print("")
 
-    def outMatrixRandom(self,seed="random"):
+    def outMatrixRandom(self,seed="random",systemizable=True):
+        is_systemizable = ''
+        if systemizable:
+            print("herfa")
+            is_systemizable = '--systemizable'
+        else:
+            is_systemizable = '--not-systemizable'
         command = ("sage src/sage/gen_test_primes.sage "
            "-N {array}    "
            "-L {rows}     "
@@ -84,6 +90,6 @@ class Systemizer:
                                         cols=self.matrixSize[1],
                                         seed=seed,
                                         field=self.field))
-        os.system(command + " --systemizable > src/gen_matrix/data.in")
+        os.system(command + f" {is_systemizable} > src/gen_matrix/data.in")
                 
     

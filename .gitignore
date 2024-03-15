@@ -3,7 +3,10 @@
 *.out
 Makefile
 *.txt
+.*.swp
+*.sage.py
 src/systemize_tb
 env/
 __pycache__/
 gen_verilog/*.v
+src/gen_verilog

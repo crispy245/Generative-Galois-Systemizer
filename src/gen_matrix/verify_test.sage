@@ -61,7 +61,7 @@ def printMatrix(mat):
   max_field_length = len(str(abs(m)))
   for i in range(mat.nrows()-1):
       for j in range(mat.ncols()-1):
-          integer_representation = int(A[i,j])
+          integer_representation = int(mat[i,j])
           integer_length   = len(str(abs(integer_representation)))
           sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
       sys.stderr.write("\n") 
@@ -169,7 +169,7 @@ while True:
     B = matrix(F, B_rows)
     
     sys.stderr.write(f"Output matrix on GF({m}): \n")
-    printMatrix(A)
+    printMatrix(B)
     #print("Output matrix 'as is':")
     #print(B)
     #print("")

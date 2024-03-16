@@ -210,7 +210,7 @@ for row in range(num):
       print("  wire r_{0}_{1};\n".format(row, col))
 
     if row > 0:
-      print("  reg  [{2}:0] data_in_{0}_{1} = 1'b0;".format(row, col, log2_field-1))
+      print("  reg  [{2}:0] data_in_{0}_{1} = {3}'b0;".format(row, col, log2_field-1,log2_field))
       print("  wire [{2}:0] data_out_{0}_{1};\n""".format(row, col, log2_field-1))
 
       print("  always @(posedge clk) begin")

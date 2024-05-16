@@ -113,6 +113,7 @@ class VerilogGen(Systemizer):
             file_path = os.path.join(self.gen_matrix, file_name)
         if not os.path.exists(file_path):
             raise ValueError("data.in and data.out not found...")
+        print(f"VERIFYING... FIELD GF({self.field})")
         command = f"sage {os.path.join(self.gen_matrix, 'verify_test.sage')} -N {self.systArraySize} -m {self.field} -L {self.matrixSize[0]} -K {self.matrixSize[1]} {self.gen_matrix}/data.in {self.gen_matrix}/data.out"
         #output_path = os.path.join(self.gen_matrix, "Verification.txt")
         os.system(command)

@@ -33,11 +33,11 @@ def main():
 
     if args.n and args.gf and args.l and args.k:
         ver = VerilogGen(args.gf,args.n,(args.l,args.k))
-        ver.cleanAll()
         
         if(args.early_abort):
              ver.setEarlyAbort()
         if(args.filepath):
+                ver.cleanAll()
                 if(args.filepath.endswith(".txt")):
                         ver.getMatrixFromFile(args.filepath)
                         ver.outMatrixToBinary()
@@ -47,17 +47,18 @@ def main():
 
         elif(not args.regen):
             if(args.not_systemizable):
+                ver.cleanAll()
                 ver.outMatrixRandom(systemizable=False)
-            else:
-                ver.outMatrixRandom()
 
         if(args.regen):
+             ver.cleanMatrix()
              ver.outMatrixRandom()
 
         if(args.runSimulation):
             ver.runExampleSim()
 
         if(args.genFullSystem):
+            ver.cleanAll()
             ver.genFullSystem()
         if(args.verify):
             ver.runMake()

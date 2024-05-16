@@ -52,20 +52,32 @@ m = args.m
 K = K - (K % N)
 
 F.<x> = GF(m, modulus="first_lexicographic")
-m = ceil(log2(m))
+
+log2_m = ceil(log2(m))
 
 f =  open(args.in_file, "r")
 f2 = open(args.out_file, "r")
 
 def printMatrix(mat):
   max_field_length = len(str(abs(m)))
-  for i in range(mat.nrows()-1):
-      for j in range(mat.ncols()-1):
-          integer_representation = int(mat[i,j])
-          integer_length   = len(str(abs(integer_representation)))
-          sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
-      sys.stderr.write("\n") 
-  print("")
+  if m % 2 != 0 :
+    print("PRIME")
+    for i in range(mat.nrows()-1):
+        for j in range(mat.ncols()-1):
+            integer_representation = int(mat[i,j])
+            integer_length   = len(str(abs(integer_representation)))
+            sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
+        sys.stderr.write("\n") 
+    print("")
+  else:
+    print("NOT PRIME")
+    for i in range(mat.nrows()-1):
+        for j in range(mat.ncols()-1):
+            integer_representation = mat[i,j].integer_representation()
+            integer_length   = len(str(abs(integer_representation)))
+            sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
+        sys.stderr.write("\n") 
+    print("")
 
 while True:
 
@@ -81,14 +93,14 @@ while True:
       line = line.strip()
   
       while len(line) > 0:
-        c = line[:m]
-        if m > 1:
+        c = line[:log2_m]
+        if log2_m > 1:
           row = [F.fetch_int(int(c,2))] + row #this  takes a binary string c, converts it to an element in the finite field F, 
                                               #and adds it to the beginning of the list row. 
                                               #This process is repeated for each substring c extracted from the line.
         else:
           row = [int(c,2)] + row
-        line = line[m:]
+        line = line[log2_m:]
   
       if len(row) == 0:
         exit()
@@ -147,13 +159,12 @@ while True:
         line = line.strip()
     
         while len(line) > 0:
-          c = line[:m]
-          if m > 1:
+          c = line[:log2_m]
+          if log2_m > 1:
             row = [F.fetch_int(int(c,2))] + row
           else:
             row = [int(c,2)] + row
-          line = line[m:]
-    
+          line = line[log2_m:]
         rows.append(row)
     
     B_rows = []
@@ -162,6 +173,8 @@ while True:
       r = []
       for j in range(int(K/N)):
         r += rows[j*L+i]
+        if j % 4 == 0 and j != 0:
+          print(r)
     
       B_rows.append(r)
     

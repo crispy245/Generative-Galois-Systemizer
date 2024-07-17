@@ -60,24 +60,19 @@ f2 = open(args.out_file, "r")
 
 def printMatrix(mat):
   max_field_length = len(str(abs(m)))
-  if m % 2 != 0 :
-    print("PRIME")
-    for i in range(mat.nrows()-1):
-        for j in range(mat.ncols()-1):
-            integer_representation = int(mat[i,j])
-            integer_length   = len(str(abs(integer_representation)))
-            sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
-        sys.stderr.write("\n") 
-    print("")
-  else:
-    print("NOT PRIME")
-    for i in range(mat.nrows()-1):
-        for j in range(mat.ncols()-1):
-            integer_representation = mat[i,j].integer_representation()
-            integer_length   = len(str(abs(integer_representation)))
-            sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
-        sys.stderr.write("\n") 
-    print("")
+  for i in range(mat.nrows()-1):
+    for j in range(mat.ncols()-1):
+      if m == 2:
+        integer_representation = int(mat[i,j])
+      elif m % 2 != 0:
+        integer_representation = int(mat[i,j])
+      else:
+        integer_representation = mat[i,j].integer_representation()
+
+      integer_length   = len(str(abs(integer_representation)))
+      sys.stderr.write(f"{integer_representation:>{max_field_length}} ")
+    sys.stderr.write("\n") 
+  print("")
 
 while True:
 
@@ -193,7 +188,7 @@ while True:
       print("output marked as NOT systemizable\n")
     
   #  for i in range(0,L,N):
-  #    if (i + N) > L:
+  #    if (i + N)   > L:
   #      break
   #    for j in range(0, N):
   #      # swap
